@@ -1,1 +1,4 @@
-export type VideoType = { key: string[]; }
+export type VideoType = { 
+    key: string[]; 
+    name: string;
+}

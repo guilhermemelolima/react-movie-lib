@@ -50,7 +50,8 @@ export const Movie =() => {
         const res = await fetch(url);
         const data = await res.json();
         const videos = data.results.map((video: VideoType) =>({
-            key: video.key
+            key: video.key,
+            name: video.name
         }));
         setVideo(videos)
     }
@@ -74,85 +75,86 @@ export const Movie =() => {
     }
 
 
-    return(
-        <div className="movie-page" >
-            {movie && 
+    return (
+        <div className="movie-page">
+            {movie && (
                 <>
-                    <h2>{movie.title}</h2>
-                    <div className="poster"></div>
-                    <div className="movie-card">
-                        <img src={imageUrl + movie.poster_path} alt={movie.title} />
-                    
-                    </div>
-                    <div className="details">
-                        <p>
-                            <FaStar id="star"/> {movie.vote_average}
-                        </p>
-                        <p className="tagline">{movie.tagline}</p>
-                        <div className="genre">
-                            {
-                                movie.genres.map((genre: GenreType) => (
-                                        <span key={genre.id} className="genre-tag">{genre.name}</span>
-                                ))
-                            }
+                    <h2 className="movie-title">{movie.title}</h2>
+                    <div className="movie-content">
+                        <div className="movie-card">
+                            <img src={imageUrl + movie.poster_path} alt={movie.title} />
                         </div>
-                        <div className="info">
-                            <h3> <BsWallet2/> Orçamento: </h3>
-                            <p>{formatCurrency(movie.budget)}</p>
-                        </div>
-                        <div className="info">
-                            <h3> <BsGraphUp/> Receita: </h3>
-                            <p>{formatCurrency(movie.revenue)}</p>
-                        </div>
-                        <div className="info">
-                            <h3> <BsHourglassSplit/> Duração:</h3>
-                            <p>{movie.runtime} minutos</p>
-                        </div>
-                        
-                        <div className="info description">
-                            <h3> <BsFillFileEarmarkTextFill/> Descrição: </h3>
-                            <p>{movie.overview} minutos</p>
+                        <div className="details">
+                            <p>
+                                <FaStar id="star" /> {movie.vote_average}
+                            </p>
+                            <p className="tagline">{movie.tagline}</p>
+                            <div className="genre">
+                                {movie.genres.map((genre: GenreType) => (
+                                    <span key={genre.id} className="genre-tag">{genre.name}</span>
+                                ))}
+                            </div>
+                            <div className="info">
+                                <h3><BsWallet2 /> Orçamento:</h3>
+                                <p>{formatCurrency(movie.budget)}</p>
+                            </div>
+                            <div className="info">
+                                <h3><BsGraphUp /> Receita:</h3>
+                                <p>{formatCurrency(movie.revenue)}</p>
+                            </div>
+                            <div className="info">
+                                <h3><BsHourglassSplit /> Duração:</h3>
+                                <p>{movie.runtime} minutos</p>
+                            </div>
+                            <div className="info description">
+                                <h3><BsFillFileEarmarkTextFill /> Descrição:</h3>
+                                <p>{movie.overview}</p>
+                            </div>
                         </div>
                     </div>
-                    
+    
                     <div className="videos">
-                        <h3>Trailers</h3>
+                        <h3>Trailers: </h3>
                         <Swiper
                             slidesPerView={1}
-                            pagination={{clickable: true}}
+                            spaceBetween={20} // Espaçamento entre os slides
+                            pagination={{ clickable: true }}
                             navigation
                             style={{
                                 "--swiper-navigation-color": "#bb86fc",
                                 "--swiper-pagination-color": "#bb86fc",
                                 "--swiper-pagination-bullet-inactive-color": "#999999",
-                              }as CSSProperties }>
-                            {video.map((video) =>(
+                            } as CSSProperties}
+                        >
+                            {video.map((video) => (
                                 <SwiperSlide>
-                                    <iframe
-                                        width="560"
-                                        height="315"
-                                        src={`https://www.youtube.com/embed/${video.key}`}
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        allowFullScreen
-                                        title="Embedded youtube"
-                                    />
+                                    <div className="video-wrapper">
+                                        <iframe
+                                            width="100%"
+                                            height="100%"
+                                            src={`https://www.youtube.com/embed/${video.key}`}
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowFullScreen
+                                            title={video.name}
+                                        />
+                                    </div>
                                 </SwiperSlide>
                             ))}
                         </Swiper>
                     </div>
-
+    
                     <div className="cast">
                         <h3>Atores:</h3>
-                        {cast.map((cast: CastType) => (
-                            cast.known_for_department === "Acting" &&  cast.profile_path &&(
-                                <div key={cast.id}>
-                                    <CastCard cast={cast} />
-                                </div>
+                        <div className="cast-list">
+                            {cast.map((cast: CastType) => (
+                            cast.known_for_department === "Acting" && cast.profile_path && (
+                                <CastCard key={cast.id} cast={cast} />
                             )
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </>
-            }
+            )}
         </div>
-    )
+    );
 }
