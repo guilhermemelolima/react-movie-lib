@@ -1,0 +1,87 @@
+.movie-page {
+  display: flex;
+  flex-direction: column;
+  padding: 0 25rem;
+  margin: 2rem auto;
+}
+
+.movie-page svg {
+  font-size: 1.5rem;
+  color: #bb86fc;
+}
+
+.movie-page #star {
+  color: #f7d354;
+}
+
+.movie-page .movie-card {
+  text-align: center;
+}
+
+.movie-page .movie-card img {
+  width: 90%;
+  border-radius: 5px;
+}
+
+.movie-page .movie-card img,
+.movie-page .movie-card h2,
+.movie-page .movie-card p {
+  margin-bottom: 1rem;
+}
+
+.movie-page .movie-card h2 {
+  font-size: 2rem;
+}
+
+.movie-page .movie-card p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.tagline {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+.movie-page .genre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.movie-page .genre h3 {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.movie-page .genre .genre-tag {
+  padding: 1rem;
+  gap: 0.5rem;
+  background-color: #bb86fc;
+  color: #121212;
+  font-weight: 800;
+  border-radius: 10px;
+}
+
+.info {
+  margin-bottom: 1.5rem;
+}
+
+.info h3 {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.description p {
+  line-height: 1.4rem;
+}
