@@ -12,7 +12,7 @@ export const MovieCard = ({ movie, showLink }: { movie: MovieType, showLink: boo
   return (
     <div className="movie-card">
       {!imageLoaded && (
-        <Skeleton variant="rectangular" width={200} height={300} />
+        <Skeleton variant="rectangular" width="100%" height={500} />
       )}
       <img
         src={imageUrl + movie.poster_path}
